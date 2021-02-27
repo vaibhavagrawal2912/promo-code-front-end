@@ -1,0 +1,16 @@
+.form,
+.list-items,
+.poly-line {
+    padding: 8px 12px;
+}
+
+.form .control,
+.control label {
+    padding: 8px;
+}
+
+.poly-line polyline {
+    fill: none;
+    stroke: black;
+    stroke-width: 3;
+}

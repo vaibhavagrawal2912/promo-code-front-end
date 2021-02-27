@@ -1,0 +1,83 @@
+<div class="form">
+  Generate Promo Code
+  <div class="control">
+    <label>Amount</label>
+    <input type="number" min="0" [(ngModel)]="ammount">
+  </div>
+  <div class="control">
+    <label>Expiry Time</label>
+    <input type="datetime-local" [(ngModel)]="expiryTime">
+  </div>
+  <div class="control">
+    <label>Promo Code Radius</label>
+    <input type="number" [(ngModel)]="promoCodeRadius">
+  </div>
+  <div class="control">
+    <label>Promo Activated</label>
+    <input type="radio" [(ngModel)]="promoCodeActivation" value="true">Yes
+    <input type="radio" [(ngModel)]="promoCodeActivation" value="false">No
+  </div>
+  <div class="control">
+    <button (click)="generatePromoCode()">Generate Promo Code</button>
+  </div>
+</div>
+
+<div *ngIf="promoCode">
+  {{promoCode}}
+</div>
+
+<div *ngIf="backendError">
+  {{backendError.error}}
+</div>
+
+<hr>
+
+<div class="list-items">
+  <button (click)="getAllPromoCodes()">Get All Promo Codes</button>
+  <ul>
+    <li *ngFor="let promo of allPromoCodes">
+      {{promo.code}}
+    </li>
+  </ul>
+</div>
+
+<hr>
+
+<div class="list-items">
+  <button (click)="getAllPromoCodes(true)">Get Active Promo Codes</button>
+  <ul>
+    <li *ngFor="let promo of activePromoCodes">
+      {{promo.code}}
+    </li>
+  </ul>
+</div>
+
+<hr>
+
+<div class="form">
+  Test Promo Code
+  <div class="control">
+    <label>Origin</label>
+    <input type="text" placeholder="X(2),Y(10)" [(ngModel)]="origin">
+  </div>
+  <div class="control">
+    <label>Destination</label>
+    <input type="text" placeholder="X(20),Y(20)" [(ngModel)]="dest">
+  </div>
+  <div class="control">
+    <label>Promo Code</label>
+    <input type="text" placeholder="Promo Code(BTa9jd)" [(ngModel)]="testPromoCode">
+  </div>
+  <div class="control">
+    <button (click)="validatePromoCode()">Validate</button>
+  </div>
+</div>
+
+<div *ngIf="validatedResponse" class="poly-line">
+  {{validatedResponse.message}}
+  <svg height="200" width="500" *ngIf="validatedResponse.success">
+    <polyline [attr.points]="validatedResponse.polyLine" />
+    <circle cx="80" cy="80" r="5" stroke="black" stroke-width="3" fill="transparent" />
+    Sorry, your browser does not support inline SVG.
+  </svg>
+</div>
